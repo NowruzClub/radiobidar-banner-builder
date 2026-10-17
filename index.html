@@ -1,243 +1,83 @@
-
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Radio BIDAR — Banner Editor</title>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
-
-:root {
-  --green: #8be63c;
-  --blue: #06447d;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: #101827;
-  color: #fff;
-  font-family: Vazirmatn, Tahoma, Arial, sans-serif;
-}
-
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
-}
-
-.toolbar {
-  width: min(1180px, 100%);
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-button, select {
-  font: inherit;
-  border: 0;
-  border-radius: 10px;
-  padding: 10px 16px;
-  cursor: pointer;
-}
-
-button.primary {
-  background: var(--green);
-  color: #102000;
-  font-weight: 800;
-}
-
-button.secondary, select {
-  background: #263449;
-  color: #fff;
-}
-
-#stageWrap {
-  width: min(92vw, 900px);
-  background: #0c1320;
-  padding: 12px;
-  border-radius: 16px;
-  box-shadow: 0 15px 50px #0007;
-}
-
-canvas {
-  display: block;
-  width: 100%;
-  height: auto;
-  background: #123;
-}
-
-.note {
-  width: min(900px, 92vw);
-  margin-top: 12px;
-  color: #c9d2df;
-  text-align: center;
-  font-size: 13px;
-}
-
-.modal {
-  position: fixed;
-  inset: 0;
-  background: #0009;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 10;
-}
-
-.modal.open { display: flex; }
-
-.panel {
-  width: min(650px, 100%);
-  background: #fff;
-  color: #172033;
-  border-radius: 18px;
-  padding: 22px;
-  box-shadow: 0 20px 70px #0008;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.panel h2 { margin: 0 0 16px; }
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.field.full { grid-column: 1/-1; }
-
-label {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-input {
-  font: inherit;
-  border: 1px solid #cfd6df;
-  border-radius: 9px;
-  padding: 10px;
-  min-width: 0;
-}
-
-input[type=file] {
-  padding: 8px;
-  background: #f6f7f9;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.help {
-  font-size: 12px;
-  color: #667085;
-  line-height: 1.7;
-}
-
-.ltr {
-  direction: ltr;
-  text-align: left;
-}
-
-@media(max-width:650px) {
-  .grid { grid-template-columns: 1fr; }
-  .field.full { grid-column: auto; }
-  .app { padding: 10px; }
-}
+:root{--green:#8be63c;--blue:#06447d}
+*{box-sizing:border-box}
+body{margin:0;background:#101827;color:#fff;font-family:Vazirmatn,Tahoma,Arial,sans-serif}
+.app{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px}
+.toolbar{width:min(1180px,100%);display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+button,select{font:inherit;border:0;border-radius:10px;padding:10px 16px;cursor:pointer}
+button.primary{background:var(--green);color:#102000;font-weight:800}
+button.secondary,select{background:#263449;color:#fff}
+#stageWrap{width:min(92vw,900px);background:#0c1320;padding:12px;border-radius:16px;box-shadow:0 15px 50px #0007}
+canvas{display:block;width:100%;height:auto;background:#123}
+.note{width:min(900px,92vw);margin-top:12px;color:#c9d2df;text-align:center;font-size:13px}
+.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+.modal.open{display:flex}
+.panel{width:min(650px,100%);background:#fff;color:#172033;border-radius:18px;padding:22px;box-shadow:0 20px 70px #0008}
+.panel h2{margin:0 0 16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:13px;font-weight:700}
+input{font:inherit;border:1px solid #cfd6df;border-radius:9px;padding:10px}
+input[type=file]{padding:8px;background:#f6f7f9}
+.actions{display:flex;justify-content:flex-start;gap:10px;margin-top:18px}
+.help{font-size:12px;color:#667085;line-height:1.7}
+.ltr{direction:ltr;text-align:left}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.app{padding:10px}}
 </style>
 </head>
-
 <body>
 <div class="app">
-
   <div class="toolbar">
     <button class="primary" id="editBtn">⚙ Edit</button>
-
     <select id="sizeSelect" class="ltr" title="Export size">
       <option value="1200x1200">1200 × 1200</option>
       <option value="1080x1080">1080 × 1080</option>
       <option value="1024x1024">1024 × 1024</option>
     </select>
-
-    <button class="secondary" id="downloadBtn">
-      ↓ Download PNG
-    </button>
+    <button class="secondary" id="downloadBtn">↓ Download PNG</button>
   </div>
-
-  <div id="stageWrap">
-    <canvas id="canvas" width="1024" height="1024"></canvas>
-  </div>
-
-  <div class="note">
-    پیشنهاد برای عکس گوینده:
-    <b>1200 × 1200 پیکسل</b>، نسبت 1:1.
-    بهتر است سر و شانه‌ها در مرکز عکس باشند.
-  </div>
+  <div id="stageWrap"><canvas id="canvas" width="1024" height="1024"></canvas></div>
+  <div class="note">پیشنهاد برای عکس گوینده: <b>1200 × 1200 پیکسل</b>، نسبت 1:1. بهتر است سر و شانه‌ها در مرکز عکس باشند.</div>
 </div>
 
 <div class="modal" id="modal">
   <div class="panel" dir="rtl">
     <h2>ویرایش اطلاعات برنامه</h2>
-
     <div class="grid">
       <div class="field full">
-        <label for="title">عنوان برنامه</label>
-        <input id="title"
-          value="بازاریابی یکپارچه برای صاحبان کسب‌وکارهای کوچک">
+        <label>عنوان برنامه</label>
+        <input id="title" value="بازاریابی یکپارچه برای صاحبان کسب‌وکارهای کوچک">
       </div>
-
       <div class="field">
-        <label for="speaker">نام فرد</label>
+        <label>نام فرد</label>
         <input id="speaker" value="امیر زمانی">
       </div>
-
       <div class="field">
-        <label for="episode">شماره اپیزود</label>
+        <label>شماره اپیزود</label>
         <input id="episode" value="129" class="ltr">
       </div>
-
       <div class="field">
-        <label for="date">تاریخ</label>
+        <label>تاریخ</label>
         <input id="date" value="2026-10-05" class="ltr">
       </div>
-
       <div class="field">
-        <label for="time">ساعت</label>
+        <label>ساعت</label>
         <input id="time" value="18:30" class="ltr">
       </div>
-
       <div class="field full">
-        <label for="photo">عکس گوینده</label>
-        <input id="photo" type="file"
-          accept="image/png,image/jpeg,image/webp">
-
-        <div class="help">
-          برای بهترین کیفیت، عکس را به صورت مربع 1200×1200 آماده کنید.
-          سایت نسبت تصویر 1:1 را حفظ می‌کند و در صورت نیاز تصویر را crop می‌کند.
-        </div>
+        <label>عکس گوینده</label>
+        <input id="photo" type="file" accept="image/png,image/jpeg,image/webp">
+        <div class="help">برای بهترین کیفیت، عکس را از ابتدا به صورت مربع 1200×1200 آماده کنید. سایت نسبت تصویر را 1:1 نگه می‌دارد و در صورت نیاز اطراف تصویر را crop می‌کند.</div>
       </div>
     </div>
-
     <div class="actions">
       <button class="primary" id="saveBtn">ذخیره و نمایش</button>
       <button class="secondary" id="cancelBtn">انصراف</button>
@@ -246,337 +86,135 @@ input[type=file] {
 </div>
 
 <script>
-const BASE_W = 1024;
-const BASE_H = 1024;
-
-const state = {
-  title: 'بازاریابی یکپارچه برای صاحبان کسب‌وکارهای کوچک',
-  speaker: 'امیر زمانی',
-  episode: '129',
-  date: '2026-10-05',
-  time: '18:30',
-  photo: null
+const BASE_W=1024, BASE_H=1024;
+const state={
+ title:'بازاریابی یکپارچه برای صاحبان کسب‌وکارهای کوچک',
+ speaker:'امیر زمانی', episode:'129', date:'2026-10-05', time:'18:30', photo:null
 };
+const canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
+const bg=new Image(); bg.src='clean_template.jpg';
+let photoImg=null;
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-
-const bg = new Image();
-bg.src = 'clean_template.jpg';
-
-let photoImg = null;
-let fontReady = false;
-
-/* Load fonts before drawing */
-document.fonts.ready.then(() => {
-  fontReady = true;
-  render();
-});
-
-/* Fit text to a maximum width */
-function fitFont(text, maxWidth, start = 56, min = 20, weight = 800) {
-  let size = start;
-
-  while (size > min) {
-    ctx.font = `${weight} ${size}px Vazirmatn, Tahoma, Arial`;
-
-    if (ctx.measureText(text).width <= maxWidth) {
-      return size;
-    }
-
-    size -= 2;
+function fitFont(text,maxWidth,start=56,min=40){
+  let s=start;
+  while(s>min){
+    ctx.font=`1000 ${s}px Vazirmatn, Tahoma, Arial`;
+    if(ctx.measureText(text).width<=maxWidth) return s;
+    s-=1;
   }
-
-  return min;
+  return s;
 }
-
-/* Wrap Persian text into lines */
-function wrapRTL(text, maxWidth, fontSize, maxLines = 3) {
-  ctx.font = `800 ${fontSize}px Vazirmatn, Tahoma, Arial`;
-
-  const words = text.trim().split(/\s+/);
-  const lines = [];
-  let line = '';
-
-  for (const word of words) {
-    const test = line ? line + ' ' + word : word;
-
-    if (ctx.measureText(test).width <= maxWidth || !line) {
-      line = test;
-    } else {
-      lines.push(line);
-      line = word;
-    }
+function wrapRTL(text,maxWidth,fontSize,maxLines=3){
+  ctx.font=`1000 ${fontSize}px Vazirmatn, Tahoma, Arial`;
+  const words=text.trim().split(/\s+/);
+  const lines=[]; let line='';
+  for(const w of words){
+    const test=line?line+' '+w:w;
+    if(ctx.measureText(test).width<=maxWidth || !line) line=test;
+    else {lines.push(line); line=w;}
   }
-
-  if (line) lines.push(line);
-
-  return lines.length <= maxLines ? lines : null;
+  if(line) lines.push(line);
+  if(lines.length<=maxLines) return lines;
+  // Reduce font until it fits in maxLines.
+  return null;
 }
-
-/* TITLE: original 150px × 1.75 = 262.5px */
-function drawTitle() {
-  const maxWidth = 510;
-  let size = 262;
-  let lines = null;
-
-  while (size >= 32) {
-    lines = wrapRTL(state.title, maxWidth, size, 3);
-
-    if (lines) break;
-    size -= 2;
+function drawTitle(){
+  let size=65, lines;
+  while(size>=50){
+    lines=wrapRTL(state.title,510,size,3);
+    if(lines) break;
+    size-=3;
   }
-
-  if (!lines) {
-    size = 32;
-    lines = wrapRTL(state.title, maxWidth, size, 3) || [state.title];
-  }
-
-  ctx.fillStyle = '#fff';
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'top';
-  ctx.direction = 'rtl';
-  ctx.font = `800 ${size}px Vazirmatn, Tahoma, Arial`;
-
-  const x = 535;
-  const y = 314;
-  const lineHeight = size * 1.18;
-
-  lines.slice(0, 3).forEach((line, i) => {
-    ctx.fillText(line, x, y + i * lineHeight, maxWidth);
-  });
+  lines=lines||[state.title];
+  ctx.fillStyle='#fff'; ctx.textAlign='right'; ctx.textBaseline='top';
+  ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
+  const x=535, y=314, lh=size*1.25;
+  lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,x,y+i*lh));
 }
-
-/*
-  META DATA:
-  Original font size was 110px.
-  New target is 220px.
-  Each item uses its own column so the enlarged text
-  does not run into adjacent items.
-*/
-function drawMeta() {
-  const items = [
-    { label: 'Episode', value: state.episode },
-    { label: 'Date', value: state.date },
-    { label: 'Time', value: state.time }
+function drawMeta(){
+  ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.font='900 35px Vazirmatn, Tahoma, Arial';
+  const rows=[
+    {y:590, label:'Episode', value:state.episode},
+    {y:650, label:'Date', value:state.date},
+    {y:710, label:'Time', value:state.time}
   ];
-
-  const columnWidth = 320;
-  const gap = 16;
-  const totalWidth = columnWidth * 3 + gap * 2;
-  const startX = (BASE_W - totalWidth) / 2;
-
-  const labelY = 790;
-  const valueY = 895;
-
-  items.forEach((item, index) => {
-    const x = startX + index * (columnWidth + gap);
-    const centerX = x + columnWidth / 2;
-
-    /* Label: enlarged target, auto-fitted to column */
-    const labelSize = fitFont(
-      item.label, columnWidth - 12, 220, 30, 900
-    );
-
-    ctx.font = `900 ${labelSize}px Vazirmatn, Tahoma, Arial`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.direction = 'ltr';
-    ctx.fillStyle = '#f6fbff';
-    ctx.fillText(item.label, centerX, labelY, columnWidth - 12);
-
-    /* Value: target 220px, fitted for available width */
-    const valueSize = fitFont(
-      item.value, columnWidth - 12, 220, 30, 900
-    );
-
-    ctx.font = `900 ${valueSize}px Vazirmatn, Tahoma, Arial`;
-    ctx.fillStyle = '#8be63c';
-    ctx.fillText(item.value, centerX, valueY, columnWidth - 12);
+  rows.forEach(r=>{
+    ctx.fillStyle='#f6fbff'; ctx.fillText(r.label,60,r.y);
+    const w=ctx.measureText(r.label).width;
+    ctx.fillStyle='#8be63c'; ctx.fillText(r.value,60+w+8,r.y);
   });
 }
-
-/* Speaker name */
-function drawSpeaker() {
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.direction = 'rtl';
-
-  const size = fitFont(state.speaker, 320, 65, 28, 800);
-
-  ctx.font = `800 ${size}px Vazirmatn, Tahoma, Arial`;
-  ctx.fillStyle = '#071b3b';
-  ctx.fillText(state.speaker, 815, 590, 320);
-}
-
-/* Speaker photo */
-function drawPhoto() {
-  const x = 665;
-  const y = 260;
-  const s = 300;
-
-  ctx.save();
-  ctx.beginPath();
-  ctx.roundRect(x, y, s, s, 22);
-  ctx.clip();
-
-  if (photoImg) {
-    const iw = photoImg.naturalWidth;
-    const ih = photoImg.naturalHeight;
-
-    const scale = Math.max(s / iw, s / ih);
-    const dw = iw * scale;
-    const dh = ih * scale;
-
-    ctx.drawImage(
-      photoImg,
-      x + (s - dw) / 2,
-      y + (s - dh) / 2,
-      dw,
-      dh
-    );
-  } else {
-    ctx.fillStyle = '#1b5c8f';
-    ctx.fillRect(x, y, s, s);
-
-    ctx.fillStyle = '#b8d8ea';
-    ctx.font = '200 24px Vazirmatn, Tahoma, Arial';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.direction = 'ltr';
-    ctx.fillText('PHOTO', x + s / 2, y + s / 2);
+function drawSpeaker(){
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  let size=56;
+  while(size>28){
+    ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
+    if(ctx.measureText(state.speaker).width<340) break;
+    size-=2;
   }
-
+  ctx.fillStyle='#071b3b';
+  ctx.fillText(state.speaker,735,666);
+}
+function drawPhoto(){
+  const x=665,y=260,s=300;
+  ctx.save();
+  ctx.beginPath(); ctx.roundRect(x,y,s,s,22); ctx.clip();
+  if(photoImg){
+    const iw=photoImg.naturalWidth, ih=photoImg.naturalHeight;
+    const scale=Math.max(s/iw,s/ih), dw=iw*scale, dh=ih*scale;
+    ctx.drawImage(photoImg,x+(s-dw)/2,y+(s-dh)/2,dw,dh);
+  }else{
+    ctx.fillStyle='#1b5c8f'; ctx.fillRect(x,y,s,s);
+    ctx.fillStyle='#b8d8ea'; ctx.font='200 24px Vazirmatn'; ctx.textAlign='center'; ctx.fillText('PHOTO',x+s/2,y+s/2);
+  }
   ctx.restore();
-
-  ctx.lineWidth = 5;
-  ctx.strokeStyle = '#fff9';
-  ctx.strokeRect(x, y, s, s);
+  ctx.lineWidth=5; ctx.strokeStyle='#fff9'; ctx.strokeRect(x,y,s,s);
 }
-
-/* Main render */
-function render() {
-  if (!bg.complete || !bg.naturalWidth) return;
-
-  ctx.clearRect(0, 0, BASE_W, BASE_H);
-  ctx.drawImage(bg, 0, 0, BASE_W, BASE_H);
-
-  drawPhoto();
-  drawTitle();
-  drawSpeaker();
-  drawMeta();
+function render(){
+  if(!bg.complete) return;
+  ctx.clearRect(0,0,BASE_W,BASE_H); ctx.drawImage(bg,0,0,BASE_W,BASE_H);
+  drawPhoto(); drawTitle(); drawMeta(); drawSpeaker();
 }
+bg.onload=render;
 
-bg.onload = render;
-bg.onerror = () => {
-  console.error(
-    'Background image not found. Check clean_template.jpg.'
-  );
-};
-
-/* Open editor */
-function openModal() {
-  document.getElementById('title').value = state.title;
-  document.getElementById('speaker').value = state.speaker;
-  document.getElementById('episode').value = state.episode;
-  document.getElementById('date').value = state.date;
-  document.getElementById('time').value = state.time;
-
+function openModal(){
+  document.getElementById('title').value=state.title;
+  document.getElementById('speaker').value=state.speaker;
+  document.getElementById('episode').value=state.episode;
+  document.getElementById('date').value=state.date;
+  document.getElementById('time').value=state.time;
   document.getElementById('modal').classList.add('open');
 }
-
-document.getElementById('editBtn').onclick = openModal;
-
-document.getElementById('cancelBtn').onclick = () => {
-  document.getElementById('modal').classList.remove('open');
+document.getElementById('editBtn').onclick=openModal;
+document.getElementById('cancelBtn').onclick=()=>document.getElementById('modal').classList.remove('open');
+document.getElementById('photo').onchange=e=>{
+  const f=e.target.files[0]; if(!f)return;
+  const url=URL.createObjectURL(f);
+  const img=new Image();
+  img.onload=()=>{photoImg=img; state.photo=url; render();};
+  img.src=url;
 };
-
-/* Upload photo */
-document.getElementById('photo').onchange = event => {
-  const file = event.target.files[0];
-
-  if (!file) return;
-
-  if (!file.type.startsWith('image/')) {
-    alert('لطفاً یک فایل تصویری انتخاب کنید.');
-    return;
-  }
-
-  const url = URL.createObjectURL(file);
-  const img = new Image();
-
-  img.onload = () => {
-    if (state.photo) URL.revokeObjectURL(state.photo);
-
-    photoImg = img;
-    state.photo = url;
-    render();
-  };
-
-  img.onerror = () => {
-    URL.revokeObjectURL(url);
-    alert('بارگذاری عکس ناموفق بود.');
-  };
-
-  img.src = url;
-};
-
-/* Save information */
-document.getElementById('saveBtn').onclick = () => {
-  state.title =
-    document.getElementById('title').value.trim() || state.title;
-
-  state.speaker =
-    document.getElementById('speaker').value.trim() || state.speaker;
-
-  state.episode =
-    document.getElementById('episode').value.trim() || state.episode;
-
-  state.date =
-    document.getElementById('date').value.trim() || state.date;
-
-  state.time =
-    document.getElementById('time').value.trim() || state.time;
-
+document.getElementById('saveBtn').onclick=()=>{
+  state.title=document.getElementById('title').value.trim()||state.title;
+  state.speaker=document.getElementById('speaker').value.trim()||state.speaker;
+  state.episode=document.getElementById('episode').value.trim()||state.episode;
+  state.date=document.getElementById('date').value.trim()||state.date;
+  state.time=document.getElementById('time').value.trim()||state.time;
   document.getElementById('modal').classList.remove('open');
   render();
 };
-
-/* Download PNG at selected resolution */
-document.getElementById('downloadBtn').onclick = () => {
-  if (!bg.complete || !bg.naturalWidth) {
-    alert('لطفاً صبر کنید تا تصویر پس‌زمینه بارگذاری شود.');
-    return;
-  }
-
-  const [w, h] = document
-    .getElementById('sizeSelect')
-    .value.split('x')
-    .map(Number);
-
-  const out = document.createElement('canvas');
-  out.width = w;
-  out.height = h;
-
-  const octx = out.getContext('2d');
-
-  octx.drawImage(canvas, 0, 0, w, h);
-
-  out.toBlob(blob => {
-    if (!blob) {
-      alert('ساخت فایل PNG ناموفق بود.');
-      return;
-    }
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-
-    a.href = url;
-    a.download = `bidar-banner-${w}x${h}.png`;
-    a.click();
-
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  }, 'image/png');
+document.getElementById('downloadBtn').onclick=()=>{
+  const [w,h]=document.getElementById('sizeSelect').value.split('x').map(Number);
+  const out=document.createElement('canvas'); out.width=w; out.height=h;
+  const octx=out.getContext('2d');
+  octx.drawImage(canvas,0,0,w,h);
+  out.toBlob(blob=>{
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=`bidar-banner-${w}x${h}.png`; a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  },'image/png');
 };
 </script>
 </body>
