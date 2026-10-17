@@ -119,7 +119,7 @@ function wrapRTL(text,maxWidth,fontSize,maxLines=3){
   return null;
 }
 function drawTitle(){
-  let size=55, lines;
+  let size=65, lines;
   while(size>=32){
     lines=wrapRTL(state.title,510,size,3);
     if(lines) break;
@@ -128,7 +128,7 @@ function drawTitle(){
   lines=lines||[state.title];
   ctx.fillStyle='#fff'; ctx.textAlign='right'; ctx.textBaseline='top';
   ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
-  const x=535, y=100, lh=size*1.25;
+  const x=535, y=500, lh=size*1.25;
   lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,x,y+i*lh));
 }
 function drawMeta(){
