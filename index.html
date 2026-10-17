@@ -133,7 +133,7 @@ function drawTitle(){
 }
 function drawMeta(){
   ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.font='700 45px Vazirmatn, Tahoma, Arial';
+  ctx.font='700 56px Vazirmatn, Tahoma, Arial';
   const rows=[
     {y:590, label:'Episode', value:state.episode},
     {y:650, label:'Date', value:state.date},
@@ -147,7 +147,7 @@ function drawMeta(){
 }
 function drawSpeaker(){
   ctx.textAlign='center'; ctx.textBaseline='middle';
-  let size=44;
+  let size=56;
   while(size>28){
     ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
     if(ctx.measureText(state.speaker).width<340) break;
