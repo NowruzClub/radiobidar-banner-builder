@@ -140,9 +140,9 @@ function drawMeta(){
     {y:710, label:'Time', value:state.time}
   ];
   rows.forEach(r=>{
-    ctx.fillStyle='#f6fbff'; ctx.fillText(r.label,50,r.y);
+    ctx.fillStyle='#f6fbff'; ctx.fillText(r.label,10,r.y);
     const w=ctx.measureText(r.label).width;
-    ctx.fillStyle='#8be63c'; ctx.fillText(r.value,50+w+8,r.y);
+    ctx.fillStyle='#8be63c'; ctx.fillText(r.value,10+w+8,r.y);
   });
 }
 function drawSpeaker(){
