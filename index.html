@@ -95,7 +95,7 @@ const canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
 const bg=new Image(); bg.src='clean_template.jpg';
 let photoImg=null;
 
-function fitFont(text,maxWidth,start=46,min=30){
+function fitFont(text,maxWidth,start=56,min=40){
   let s=start;
   while(s>min){
     ctx.font=`1000 ${s}px Vazirmatn, Tahoma, Arial`;
