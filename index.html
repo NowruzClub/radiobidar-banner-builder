@@ -119,7 +119,7 @@ function wrapRTL(text,maxWidth,fontSize,maxLines=3){
   return null;
 }
 function drawTitle(){
-  let size=90, lines;
+  let size=150, lines;
   while(size>=32){
     lines=wrapRTL(state.title,510,size,3);
     if(lines) break;
@@ -133,7 +133,7 @@ function drawTitle(){
 }
 function drawMeta(){
   ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.font='900 90px Vazirmatn, Tahoma, Arial';
+  ctx.font='900 110px Vazirmatn, Tahoma, Arial';
   const rows=[
     {y:590, label:'Episode', value:state.episode},
     {y:650, label:'Date', value:state.date},
