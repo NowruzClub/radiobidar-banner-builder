@@ -98,14 +98,14 @@ let photoImg=null;
 function fitFont(text,maxWidth,start=46,min=30){
   let s=start;
   while(s>min){
-    ctx.font=`800 ${s}px Vazirmatn, Tahoma, Arial`;
+    ctx.font=`1000 ${s}px Vazirmatn, Tahoma, Arial`;
     if(ctx.measureText(text).width<=maxWidth) return s;
     s-=1;
   }
   return s;
 }
 function wrapRTL(text,maxWidth,fontSize,maxLines=3){
-  ctx.font=`800 ${fontSize}px Vazirmatn, Tahoma, Arial`;
+  ctx.font=`1000 ${fontSize}px Vazirmatn, Tahoma, Arial`;
   const words=text.trim().split(/\s+/);
   const lines=[]; let line='';
   for(const w of words){
@@ -127,13 +127,13 @@ function drawTitle(){
   }
   lines=lines||[state.title];
   ctx.fillStyle='#fff'; ctx.textAlign='right'; ctx.textBaseline='top';
-  ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
+  ctx.font=`1000 ${size}px Vazirmatn, Tahoma, Arial`;
   const x=535, y=292, lh=size*1.25;
   lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,x,y+i*lh));
 }
 function drawMeta(){
   ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.font='700 50px Vazirmatn, Tahoma, Arial';
+  ctx.font='900 30px Vazirmatn, Tahoma, Arial';
   const rows=[
     {y:590, label:'Episode', value:state.episode},
     {y:650, label:'Date', value:state.date},
@@ -149,7 +149,7 @@ function drawSpeaker(){
   ctx.textAlign='center'; ctx.textBaseline='middle';
   let size=44;
   while(size>28){
-    ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
+    ctx.font=`1000 ${size}px Vazirmatn, Tahoma, Arial`;
     if(ctx.measureText(state.speaker).width<340) break;
     size-=2;
   }
@@ -166,7 +166,7 @@ function drawPhoto(){
     ctx.drawImage(photoImg,x+(s-dw)/2,y+(s-dh)/2,dw,dh);
   }else{
     ctx.fillStyle='#1b5c8f'; ctx.fillRect(x,y,s,s);
-    ctx.fillStyle='#b8d8ea'; ctx.font='700 24px Vazirmatn'; ctx.textAlign='center'; ctx.fillText('PHOTO',x+s/2,y+s/2);
+    ctx.fillStyle='#b8d8ea'; ctx.font='200 24px Vazirmatn'; ctx.textAlign='center'; ctx.fillText('PHOTO',x+s/2,y+s/2);
   }
   ctx.restore();
   ctx.lineWidth=5; ctx.strokeStyle='#fff9'; ctx.strokeRect(x,y,s,s);
