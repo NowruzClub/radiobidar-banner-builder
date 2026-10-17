@@ -128,12 +128,12 @@ function drawTitle(){
   lines=lines||[state.title];
   ctx.fillStyle='#fff'; ctx.textAlign='right'; ctx.textBaseline='top';
   ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
-  const x=535, y=700, lh=size*1.25;
+  const x=535, y=200, lh=size*1.25;
   lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,x,y+i*lh));
 }
 function drawMeta(){
   ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.font='700 70px Vazirmatn, Tahoma, Arial';
+  ctx.font='900 70px Vazirmatn, Tahoma, Arial';
   const rows=[
     {y:590, label:'Episode', value:state.episode},
     {y:650, label:'Date', value:state.date},
