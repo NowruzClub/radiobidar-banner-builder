@@ -128,7 +128,7 @@ function drawTitle(){
   lines=lines||[state.title];
   ctx.fillStyle='#fff'; ctx.textAlign='right'; ctx.textBaseline='top';
   ctx.font=`800 ${size}px Vazirmatn, Tahoma, Arial`;
-  const x=535, y=314, lh=size*1.25;
+  const x=590, y=314, lh=size*1.25;
   lines.slice(0,3).forEach((line,i)=>ctx.fillText(line,x,y+i*lh));
 }
 function drawMeta(){
