@@ -69,8 +69,12 @@ input[type=file]{padding:8px;background:#f6f7f9}
         <input id="date" value="2026-10-05" class="ltr">
       </div>
       <div class="field">
-        <label>ساعت</label>
-        <input id="time" value="18:30" class="ltr">
+        <label>ساعت تورنتو (Toronto)</label>
+        <input id="torontoTime" value="18:30" class="ltr" type="time">
+      </div>
+      <div class="field">
+        <label>ساعت ونکوور (Vancouver)</label>
+        <input id="vancouverTime" value="15:30" class="ltr" type="time">
       </div>
       <div class="field full">
         <label>عکس گوینده</label>
@@ -89,7 +93,8 @@ input[type=file]{padding:8px;background:#f6f7f9}
 const BASE_W=1024, BASE_H=1024;
 const state={
  title:'بازاریابی یکپارچه برای صاحبان کسب‌وکارهای کوچک',
- speaker:'امیر زمانی', episode:'129', date:'2026-10-05', time:'18:30', photo:null
+ speaker:'امیر زمانی', episode:'129', date:'2026-10-05',
+ torontoTime:'18:30', vancouverTime:'15:30', photo:null
 };
 const canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
 const bg=new Image(); bg.src='clean_template.jpg';
@@ -133,11 +138,12 @@ function drawTitle(){
 }
 function drawMeta(){
   ctx.textAlign='left'; ctx.textBaseline='middle';
-  ctx.font='900 35px Vazirmatn, Tahoma, Arial';
+  ctx.font='900 32px Vazirmatn, Tahoma, Arial';
   const rows=[
-    {y:590, label:'Episode', value:state.episode},
-    {y:650, label:'Date', value:state.date},
-    {y:710, label:'Time', value:state.time}
+    {y:530, label:'Episode', value:state.episode},
+    {y:590, label:'Date', value:state.date},
+    {y:650, label:'Toronto Time', value:state.torontoTime},
+    {y:710, label:'Vancouver Time', value:state.vancouverTime}
   ];
   rows.forEach(r=>{
     ctx.fillStyle='#f6fbff'; ctx.fillText(r.label,60,r.y);
@@ -183,7 +189,8 @@ function openModal(){
   document.getElementById('speaker').value=state.speaker;
   document.getElementById('episode').value=state.episode;
   document.getElementById('date').value=state.date;
-  document.getElementById('time').value=state.time;
+  document.getElementById('torontoTime').value=state.torontoTime;
+  document.getElementById('vancouverTime').value=state.vancouverTime;
   document.getElementById('modal').classList.add('open');
 }
 document.getElementById('editBtn').onclick=openModal;
@@ -200,7 +207,8 @@ document.getElementById('saveBtn').onclick=()=>{
   state.speaker=document.getElementById('speaker').value.trim()||state.speaker;
   state.episode=document.getElementById('episode').value.trim()||state.episode;
   state.date=document.getElementById('date').value.trim()||state.date;
-  state.time=document.getElementById('time').value.trim()||state.time;
+  state.torontoTime=document.getElementById('torontoTime').value.trim()||state.torontoTime;
+  state.vancouverTime=document.getElementById('vancouverTime').value.trim()||state.vancouverTime;
   document.getElementById('modal').classList.remove('open');
   render();
 };
